@@ -24,6 +24,20 @@ class ClockTest {
         long second = testClock.currentSeconds();
 
         assertEquals(1, second - first);
+    }
+
+    @Test
+    void populateTimeUnits_RunIt_SetsHoursSecondsMinutesCorrespondingToInternalSecs() {
+        Clock testClock = new Clock();
+        testClock.setInternalSeconds(3666);
+
+        testClock.populateTimeUnits();
+
+        assertEquals(1, testClock.hours);
+        assertEquals(1, testClock.minutes);
+        assertEquals(6, testClock.seconds);
+
+
 
     }
 }
