@@ -1,5 +1,6 @@
 class Clock {
 
+    private final int MILLIS_PER_SECOND = 1000;
     private final int SECONDS_PER_MINUTE = 60;
     private final int MINUTES_PER_HOUR = 60;
     private final int HOURS_PER_DAY = 24;
@@ -19,8 +20,8 @@ class Clock {
         setInternalSeconds(0);
     }
 
-    long extractCurrentDaysSeconds(long millisSinceEpoch) {
-        return millisSinceEpoch / 1000 % SECONDS_PER_DAY;
+    void extractCurrentDaysSeconds(long millisSinceEpoch) {
+        setInternalSeconds(millisSinceEpoch / MILLIS_PER_SECOND % SECONDS_PER_DAY);
     }
 
     private void setInternalSeconds(long internalSeconds) {
@@ -33,7 +34,7 @@ class Clock {
 
     void populateTimeUnits() {
         this.hours = (int) (internalSeconds / SECONDS_PER_HOUR);
-        this.minutes = (int) (internalSeconds / 60 % 60);
+        this.minutes = (int) (internalSeconds / SECONDS_PER_MINUTE % MINUTES_PER_HOUR);
         this.seconds = (int) (internalSeconds % SECONDS_PER_MINUTE);
     }
 }
