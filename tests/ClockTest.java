@@ -4,40 +4,50 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClockTest {
 
     @Test
-    void currentSeconds_RunIt_ReturnsAnSecondsForAtMost24Hours() {
+    void extractCurrentDaysSeconds_EpochPlusOneSecond_ReturnsOne() {
         Clock testClock = new Clock();
 
-        long result = testClock.currentSeconds();
+        long result = testClock.extractCurrentDaysSeconds(1000L);
 
-        assertTrue(result >= 0);
-        assertTrue(result < 60 * 60 * 24);
+        assertEquals(1L, result);
     }
 
     @Test
-    void currentSeconds_RunItTwice_DiffShouldReflectTheSleepTimeOf1Sec() throws InterruptedException {
+    void extractCurrentDaysSeconds_2019Plus1d2h3m4s_Returns7384() {
         Clock testClock = new Clock();
 
-        long first = testClock.currentSeconds();
+        long result = testClock.extractCurrentDaysSeconds(1546394584000L);
 
-        Thread.sleep(1000);
+        assertEquals(7384L, result);
+    }
 
-        long second = testClock.currentSeconds();
+    @Test
+    void extractCurrentDaysSeconds_EpochPlusChangeMillis_ReturnsZero() {
+        Clock testClock = new Clock();
 
-        assertEquals(1, second - first);
+        long result = testClock.extractCurrentDaysSeconds(111L);
+
+        assertEquals(0, result);
+    }
+
+    @Test
+    void extractCurrentDaysSeconds_EpochPlus1s999Millis_ReturnsOne() {
+        Clock testClock = new Clock();
+
+        long result = testClock.extractCurrentDaysSeconds(1999);
+
+        assertEquals(1, result);
     }
 
     @Test
     void populateTimeUnits_RunIt_SetsHoursSecondsMinutesCorrespondingToInternalSecs() {
-        Clock testClock = new Clock();
-        testClock.setInternalSeconds(3666);
+        Clock testClock = new Clock(3666);
 
         testClock.populateTimeUnits();
 
         assertEquals(1, testClock.hours);
         assertEquals(1, testClock.minutes);
         assertEquals(6, testClock.seconds);
-
-
 
     }
 }

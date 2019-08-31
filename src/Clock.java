@@ -11,11 +11,19 @@ class Clock {
     int seconds;
     private long internalSeconds;
 
-    long currentSeconds() {
-        return System.currentTimeMillis() / 1000 % SECONDS_PER_DAY;
+    Clock(long seconds) {
+        setInternalSeconds(seconds);
     }
 
-    void setInternalSeconds(long internalSeconds) {
+    Clock() {
+        setInternalSeconds(0);
+    }
+
+    long extractCurrentDaysSeconds(long millisSinceEpoch) {
+        return millisSinceEpoch / 1000 % SECONDS_PER_DAY;
+    }
+
+    private void setInternalSeconds(long internalSeconds) {
         this.internalSeconds = internalSeconds;
     }
 
