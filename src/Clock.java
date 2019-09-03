@@ -28,7 +28,7 @@ class Clock {
         this.internalSeconds = internalSeconds;
     }
 
-    public long getInternalSeconds() {
+    long getInternalSeconds() {
         return internalSeconds;
     }
 
@@ -38,8 +38,12 @@ class Clock {
         this.seconds = (int) (internalSeconds % SECONDS_PER_MINUTE);
     }
 
-    public String stringifyTime() {
+    String stringifyTime() {
         populateTimeUnits();
-        return hours + ":" + minutes + ":" + seconds;
+        return addZeroToFrontIfNecessary(hours) + ":" + addZeroToFrontIfNecessary(minutes) + ":" + addZeroToFrontIfNecessary(seconds);
+    }
+
+    String addZeroToFrontIfNecessary(int variableWidthValue) {
+        return variableWidthValue < 10 ? "0" + variableWidthValue : Integer.toString(variableWidthValue);
     }
 }

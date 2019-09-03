@@ -56,6 +56,24 @@ class ClockTest {
 
         String result = testClock.stringifyTime();
 
-        assertEquals("1:2:30", result);
+        assertEquals("01:02:30", result);
+    }
+
+    @Test
+    void addZeroToFrontIfNecessary_SmallerThan10_AddingZeroToFront() {
+        Clock testClock = new Clock();
+
+        String result = testClock.addZeroToFrontIfNecessary(9);
+
+        assertEquals("09", result);
+    }
+
+    @Test
+    void addZeroToFrontIfNecessary_LargerThan10_KeepNumber() {
+        Clock testClock = new Clock();
+
+        String result = testClock.addZeroToFrontIfNecessary(11);
+
+        assertEquals("11", result);
     }
 }
