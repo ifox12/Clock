@@ -37,4 +37,9 @@ class Clock {
         this.minutes = (int) (internalSeconds / SECONDS_PER_MINUTE % MINUTES_PER_HOUR);
         this.seconds = (int) (internalSeconds % SECONDS_PER_MINUTE);
     }
+
+    public String stringifyTime() {
+        populateTimeUnits();
+        return hours + ":" + minutes + ":" + seconds;
+    }
 }

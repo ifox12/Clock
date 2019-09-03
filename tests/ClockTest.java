@@ -51,13 +51,11 @@ class ClockTest {
     }
 
     @Test
-    void Foo_Bar_Bof() {
-        Clock testClock = new Clock();
+    void stringifyTime_1h2m30s_OutputCorrectString() {
+        Clock testClock = new Clock(3750);
 
-        testClock.extractCurrentDaysSeconds(System.currentTimeMillis());
+        String result = testClock.stringifyTime();
 
-        testClock.populateTimeUnits();
-
-        System.out.println(testClock.hours + ":" + testClock.minutes + ":" + testClock.seconds);
+        assertEquals("1:2:30", result);
     }
 }
