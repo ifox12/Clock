@@ -10,6 +10,7 @@ public class GUI implements UI {
     public void prepare(String title) {
         window = new JFrame(title);
         window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         clockLabel = new JLabel();
         window.add(clockLabel);
         window.setVisible(true);
